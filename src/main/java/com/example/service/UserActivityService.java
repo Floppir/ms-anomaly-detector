@@ -54,6 +54,7 @@ public class UserActivityService {
                 .eventType(event.getEventType())
                 .ipAddress(event.getIpAddress())
                 .userAgent(event.getUserAgent())
+                .rawPayload(event.getPayload())
                 .createdAt(event.getCreatedAt());
 
         if (event.getEventType() == EventType.LOGIN && event.getPayload() != null) {

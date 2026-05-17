@@ -26,4 +26,7 @@ public interface UserActivityRepository extends JpaRepository<UserActivity, Long
     long countDistinctUsersByIpAddressAndCreatedAtAfter(
             @Param("ipAddress") String ipAddress,
             @Param("after") LocalDateTime after);
+
+    long countByUserIdAndEventTypeAndCreatedAtAfter(
+            Long userId, EventType eventType, LocalDateTime after);
 }

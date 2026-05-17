@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
 
@@ -22,7 +24,8 @@ import java.time.LocalDateTime;
 public class UserActivity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_activities_seq")
+    @SequenceGenerator(name = "user_activities_seq", sequenceName = "user_activities_id_seq", allocationSize = 1)
     private Long id;
 
     private Long userId;
@@ -35,5 +38,10 @@ public class UserActivity {
     private String country;
     private String city;
     private String deviceFingerprint;
+
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "jsonb")
+    private String rawPayload;
+
     private LocalDateTime createdAt;
 }
