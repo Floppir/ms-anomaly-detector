@@ -25,7 +25,6 @@ import java.util.Optional;
 public class ImpossibleTravelDetector implements AnomalyDetector {
 
     private final UserActivityRepository userActivityRepository;
-    private final ObjectMapper objectMapper;
 
     @Value("${anomaly.impossible-travel.window-minutes}")
     private int windowMinutes;
@@ -35,24 +34,19 @@ public class ImpossibleTravelDetector implements AnomalyDetector {
         if (event.getEventType() != EventType.LOGIN) {
             return Collections.emptyList();
         }
-
-        String currentCountry = savedActivity.getCountry();
+        var currentCountry = savedActivity.getCountry();
         if (currentCountry == null || currentCountry.isBlank()) {
             return Collections.emptyList();
         }
-
         Optional<UserActivity> previousLogin = userActivityRepository
                 .findTopByUserIdAndEventTypeOrderByCreatedAtDesc(event.getUserId(), EventType.LOGIN);
-
         if (previousLogin.isEmpty()) {
             return Collections.emptyList();
         }
-
-        UserActivity prev = previousLogin.get();
+        var prev = previousLogin.get();
         if (prev.getId().equals(savedActivity.getId())) {
             return Collections.emptyList();
         }
-
         boolean withinWindow = prev.getCreatedAt().isAfter(LocalDateTime.now().minusMinutes(windowMinutes));
         boolean differentCountry = !currentCountry.equalsIgnoreCase(prev.getCountry());
 
