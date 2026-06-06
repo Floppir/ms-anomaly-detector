@@ -23,20 +23,29 @@ public class AnomalyAlert {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "user_id")
     private Long userId;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "anomaly_type")
     private AnomalyType anomalyType;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "severity")
     private AnomalySeverity severity;
 
-    @Column(length = 1024)
+    @Column(name = "description", length = 1024)
     private String description;
 
+    @Column(name = "ip_address")
     private String ipAddress;
+
+    @Column(name = "detected_at")
     private LocalDateTime detectedAt;
+
+    @Column(name = "resolved")
     private boolean resolved;
 }

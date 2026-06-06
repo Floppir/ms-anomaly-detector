@@ -26,22 +26,35 @@ public class UserActivity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_activities_seq")
     @SequenceGenerator(name = "user_activities_seq", sequenceName = "user_activities_id_seq", allocationSize = 1)
+    @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "user_id")
     private Long userId;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "event_type")
     private EventType eventType;
 
+    @Column(name = "ip_address")
     private String ipAddress;
+
+    @Column(name = "user_agent")
     private String userAgent;
+
+    @Column(name = "country")
     private String country;
+
+    @Column(name = "city")
     private String city;
+
+    @Column(name = "device_fingerprint")
     private String deviceFingerprint;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    @Column(columnDefinition = "jsonb")
+    @Column(name = "raw_payload", columnDefinition = "jsonb")
     private String rawPayload;
 
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 }
