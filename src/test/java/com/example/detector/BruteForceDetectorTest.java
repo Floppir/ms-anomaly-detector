@@ -76,7 +76,7 @@ class BruteForceDetectorTest {
         var result = detector.detect(event, UserActivity.builder().build());
 
         assertThat(result).hasSize(1);
-        AnomalyAlert alert = result.get(0);
+        AnomalyAlert alert = result.getFirst();
         assertThat(alert.getAnomalyType()).isEqualTo(AnomalyType.BRUTE_FORCE);
         assertThat(alert.getSeverity()).isEqualTo(AnomalySeverity.HIGH);
         assertThat(alert.getUserId()).isEqualTo(1L);
@@ -100,7 +100,7 @@ class BruteForceDetectorTest {
         var result = detector.detect(event, UserActivity.builder().build());
 
         assertThat(result).hasSize(1);
-        assertThat(result.get(0).getAnomalyType()).isEqualTo(AnomalyType.BRUTE_FORCE);
+        assertThat(result.getFirst().getAnomalyType()).isEqualTo(AnomalyType.BRUTE_FORCE);
     }
 
     private UserEventMessage buildEvent(EventType type) {

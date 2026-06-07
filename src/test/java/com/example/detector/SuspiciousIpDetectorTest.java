@@ -68,8 +68,8 @@ class SuspiciousIpDetectorTest {
         var result = detector.detect(event, UserActivity.builder().build());
 
         assertThat(result).hasSize(1);
-        assertThat(result.get(0).getAnomalyType()).isEqualTo(AnomalyType.SUSPICIOUS_IP);
-        assertThat(result.get(0).getIpAddress()).isEqualTo("1.2.3.4");
+        assertThat(result.getFirst().getAnomalyType()).isEqualTo(AnomalyType.SUSPICIOUS_IP);
+        assertThat(result.getFirst().getIpAddress()).isEqualTo("1.2.3.4");
     }
 
     @Test

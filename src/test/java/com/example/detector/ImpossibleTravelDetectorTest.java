@@ -88,8 +88,8 @@ class ImpossibleTravelDetectorTest {
         var result = detector.detect(event, current);
 
         assertThat(result).hasSize(1);
-        assertThat(result.get(0).getAnomalyType()).isEqualTo(AnomalyType.IMPOSSIBLE_TRAVEL);
-        assertThat(result.get(0).getSeverity()).isEqualTo(AnomalySeverity.CRITICAL);
+        assertThat(result.getFirst().getAnomalyType()).isEqualTo(AnomalyType.IMPOSSIBLE_TRAVEL);
+        assertThat(result.getFirst().getSeverity()).isEqualTo(AnomalySeverity.CRITICAL);
     }
 
     @Test

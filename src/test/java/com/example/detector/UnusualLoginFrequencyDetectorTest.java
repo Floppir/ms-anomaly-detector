@@ -80,8 +80,8 @@ class UnusualLoginFrequencyDetectorTest {
         var result = detector.detect(event, UserActivity.builder().build());
 
         assertThat(result).hasSize(1);
-        assertThat(result.get(0).getAnomalyType()).isEqualTo(AnomalyType.UNUSUAL_LOGIN_FREQUENCY);
-        assertThat(result.get(0).getDescription()).contains("10 logins in the last hour");
+        assertThat(result.getFirst().getAnomalyType()).isEqualTo(AnomalyType.UNUSUAL_LOGIN_FREQUENCY);
+        assertThat(result.getFirst().getDescription()).contains("10 logins in the last hour");
     }
 
     private UserEventMessage buildEvent(EventType type) {

@@ -77,9 +77,9 @@ class NewDeviceAnomalyDetectorTest {
         var result = detector.detect(event, UserActivity.builder().build());
 
         assertThat(result).hasSize(1);
-        assertThat(result.get(0).getAnomalyType()).isEqualTo(AnomalyType.NEW_DEVICE_AFTER_FAILED_LOGINS);
-        assertThat(result.get(0).getDescription()).contains("fp-attacker");
-        assertThat(result.get(0).getDescription()).contains("2");
+        assertThat(result.getFirst().getAnomalyType()).isEqualTo(AnomalyType.NEW_DEVICE_AFTER_FAILED_LOGINS);
+        assertThat(result.getFirst().getDescription()).contains("fp-attacker");
+        assertThat(result.getFirst().getDescription()).contains("2");
     }
 
     @Test

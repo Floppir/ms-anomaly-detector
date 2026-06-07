@@ -42,7 +42,7 @@ class AnomalyAlertRepositoryIntegrationTest {
         List<AnomalyAlert> result = repository.findAllByOrderByDetectedAtDesc();
 
         assertThat(result).hasSize(3);
-        assertThat(result.get(0).getDetectedAt()).isAfter(result.get(1).getDetectedAt());
+        assertThat(result.getFirst().getDetectedAt()).isAfter(result.get(1).getDetectedAt());
         assertThat(result.get(1).getDetectedAt()).isAfter(result.get(2).getDetectedAt());
     }
 
@@ -57,7 +57,7 @@ class AnomalyAlertRepositoryIntegrationTest {
         assertThat(result)
                 .hasSize(2)
                 .allMatch(a -> a.getUserId().equals(1L));
-        assertThat(result.get(0).getDetectedAt()).isAfter(result.get(1).getDetectedAt());
+        assertThat(result.getFirst().getDetectedAt()).isAfter(result.get(1).getDetectedAt());
     }
 
     @Test
@@ -78,7 +78,7 @@ class AnomalyAlertRepositoryIntegrationTest {
         assertThat(result)
                 .hasSize(2)
                 .allMatch(a -> !a.isResolved());
-        assertThat(result.get(0).getDetectedAt()).isAfter(result.get(1).getDetectedAt());
+        assertThat(result.getFirst().getDetectedAt()).isAfter(result.get(1).getDetectedAt());
     }
 
     @Test
@@ -124,8 +124,8 @@ class AnomalyAlertRepositoryIntegrationTest {
         assertThat(saved.isResolved()).isFalse();
     }
 
-    private AnomalyAlert saveAlert(Long userId, AnomalyType type, LocalDateTime detectedAt, boolean resolved) {
-        return repository.save(AnomalyAlert.builder()
+    private void saveAlert(Long userId, AnomalyType type, LocalDateTime detectedAt, boolean resolved) {
+        repository.save(AnomalyAlert.builder()
                 .userId(userId)
                 .anomalyType(type)
                 .severity(AnomalySeverity.HIGH)
