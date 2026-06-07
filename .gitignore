@@ -36,4 +36,3 @@ out/
 ### VS Code ###
 .vscode/
 /.gitattributes
-/.claude/settings.local.json
